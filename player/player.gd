@@ -14,6 +14,8 @@ export (PackedScene) var player_glitch
 var input_direction = Vector2.ZERO
 var velocity = Vector2.ZERO
 
+onready var game_window = get_node("../")
+
 func _process(_delta):
 	if Input.is_action_pressed("left"):
 		input_direction = Vector2.LEFT
@@ -29,9 +31,10 @@ func _process(_delta):
 			position.x = tuned_x
 			var _pg = player_glitch.instance()
 			_pg.position = position
-			owner.add_child(_pg)
+			get_parent().add_child(_pg)
 			position.y -= 16.0
 			velocity.y = -jump_power
+			game_window.shake()
 
 
 
