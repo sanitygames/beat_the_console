@@ -78,7 +78,7 @@ func _on_EnterDoor_area_entered(area:Area2D):
 		modulate.a = a
 		yield(get_tree(), "idle_frame")
 	yield(get_tree().create_timer(1.0), "timeout")
-	Transition.transition_start(Global.now_stage)
+	Global.transition_start()
 
 
 func _on_EnterNeedle_area_entered(area:Area2D):

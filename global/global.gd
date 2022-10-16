@@ -13,3 +13,14 @@ func _input(event):
 		var _e = get_tree().reload_current_scene()
 
 
+func transition_start():
+	$Transition/AnimationPlayer.play("close")
+	yield($Transition/AnimationPlayer, "animation_finished")
+	now_stage = (now_stage + 1) % scenes.size()
+	$Transition/Label.text = "STAGE %02d / 10" % now_stage
+	$Transition/Label.visible = true
+	yield(get_tree().create_timer(1.0),"timeout")
+	$Transition/Label.visible = false
+	$Transition/AnimationPlayer.play("open")
+	var _e = get_tree().change_scene(scenes[now_stage])
+	yield($Transition/AnimationPlayer, "animation_finished")

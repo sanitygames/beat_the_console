@@ -6,7 +6,7 @@ func _ready():
 	for child in $Hand.get_children():
 		hands.push_back(child)
 
-func _on_Player_shake():
+func shake():
 	_select_hand(randi() % 3)
 	$AnimationPlayer.play("beat")
 
