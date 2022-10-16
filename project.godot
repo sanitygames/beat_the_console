@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Beat the console v1.2"
-run/main_scene="res://player/PlayerDebugStage.tscn"
+run/main_scene="res://title/title.tscn"
 
 [autoload]
 
@@ -22,8 +22,9 @@ Global="*res://global/global.tscn"
 
 window/size/width=384
 window/size/height=256
-window/size/test_width=512
-window/size/test_height=480
+window/size/test_width=1536
+window/size/test_height=1024
+window/vsync/vsync_via_compositor=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -110,6 +111,7 @@ retry={
 
 2d_physics/layer_1="floor"
 2d_physics/layer_2="player"
+2d_physics/layer_3="needle"
 
 [physics]
 

@@ -1,10 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://player/png/Player2.png" type="Texture" id=1]
 [ext_resource path="res://player/png/Player1.png" type="Texture" id=2]
 [ext_resource path="res://player/png/Player3.png" type="Texture" id=3]
 [ext_resource path="res://player/player.gd" type="Script" id=4]
 [ext_resource path="res://player_glitch/player_glitch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/sound/clear.wav" type="AudioStream" id=6]
+[ext_resource path="res://resources/sound/glitch.wav" type="AudioStream" id=7]
+[ext_resource path="res://resources/sound/death.wav" type="AudioStream" id=8]
+[ext_resource path="res://resources/sound/jump.wav" type="AudioStream" id=9]
+[ext_resource path="res://resources/sound/ground.wav" type="AudioStream" id=10]
+
+[sub_resource type="ShaderMaterial" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -28,6 +35,13 @@ animations = [ {
 radius = 3.0
 height = 8.0
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 1.19886
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 2.94818
+height = 8.17382
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 28.0346, 144.073 )
 collision_layer = 2
@@ -38,6 +52,7 @@ g = 186.0
 player_glitch = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 5 )
 frames = SubResource( 1 )
 animation = "idle"
 playing = true
@@ -48,8 +63,44 @@ shape = SubResource( 2 )
 
 [node name="CheckFloorCast" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 0, 12 )
+cast_to = Vector2( 0, 10 )
 
 [node name="CheckUpCast" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, -20 )
+
+[node name="EnterDoor" type="Area2D" parent="."]
+position = Vector2( 0, 6.84892 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterDoor"]
+shape = SubResource( 3 )
+
+[node name="EnterNeedle" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterNeedle"]
+shape = SubResource( 6 )
+
+[node name="GlitchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="GroundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="KeySound" type="AudioStreamPlayer" parent="."]
+
+[node name="ClearSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[connection signal="area_entered" from="EnterDoor" to="." method="_on_EnterDoor_area_entered"]
+[connection signal="area_entered" from="EnterNeedle" to="." method="_on_EnterNeedle_area_entered"]
+[connection signal="body_entered" from="EnterNeedle" to="." method="_on_EnterNeedle_body_entered"]
