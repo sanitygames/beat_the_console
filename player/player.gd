@@ -5,6 +5,8 @@
 
 extends KinematicBody2D
 
+signal shake
+
 export (float) var speed = 10.0
 export (float) var jump_power = 100.0
 export (float) var g = 10.0
@@ -14,7 +16,8 @@ export (PackedScene) var player_glitch
 var input_direction = Vector2.ZERO
 var velocity = Vector2.ZERO
 
-onready var game_window = get_node("../")
+# onready var game_window = get_node("../")
+# onready var sub_window = get_node("../../SubWindow")
 
 func _process(_delta):
 	if Input.is_action_pressed("left"):
@@ -31,10 +34,11 @@ func _process(_delta):
 			position.x = tuned_x
 			var _pg = player_glitch.instance()
 			_pg.position = position
-			get_parent().add_child(_pg)
+			get_node("../Glitch").add_child(_pg)
 			position.y -= 16.0
 			velocity.y = -jump_power
-			game_window.shake()
+
+			emit_signal("shake")
 
 
 

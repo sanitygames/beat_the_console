@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://tilemap/tilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://font/Silkscreen-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://console/png/consolet.png" type="Texture" id=6]
 [ext_resource path="res://game_window/game_window.gd" type="Script" id=7]
 [ext_resource path="res://resources/stage/map_tileset.tres" type="TileSet" id=8]
+[ext_resource path="res://sub_window/sub_window.gd" type="Script" id=9]
+[ext_resource path="res://shader/crt_shader.tres" type="Shader" id=10]
+[ext_resource path="res://resources/1x1.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=3]
 size = 8
@@ -61,6 +64,30 @@ font_data = ExtResource( 2 )
 extra_spacing_char = -2
 font_data = ExtResource( 2 )
 
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 10 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.112
+shader_param/scanlines_width = 0.25
+shader_param/grille_opacity = 0.3
+shader_param/resolution = Vector2( 512, 512 )
+shader_param/pixelate = false
+shader_param/roll = true
+shader_param/roll_speed = 16.386
+shader_param/roll_size = 7.424
+shader_param/roll_variation = 3.323
+shader_param/distort_intensity = 0.0
+shader_param/noise_opacity = 0.0
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.0
+shader_param/aberration = 0.001
+shader_param/brightness = 1.4
+shader_param/discolor = true
+shader_param/warp_amount = 0.05
+shader_param/clip_warp = false
+shader_param/vignette_intensity = -0.188
+shader_param/vignette_opacity = 0.156
+
 [node name="Title" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -68,13 +95,19 @@ margin_top = -128.0
 margin_right = 384.0
 margin_bottom = 384.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Console" type="Sprite" parent="."]
+[node name="SubWindow" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="Console" type="Sprite" parent="SubWindow"]
 position = Vector2( 296.611, 196.83 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 6 )
 
-[node name="Instruction" type="Label" parent="."]
+[node name="Instruction" type="Label" parent="SubWindow"]
 margin_left = 267.0
 margin_top = 21.0
 margin_right = 356.0
@@ -91,7 +124,7 @@ RETRY: [R]
 
 PREFERANCE: [ESC]"
 
-[node name="TileMap2" type="TileMap" parent="."]
+[node name="TileMap2" type="TileMap" parent="SubWindow"]
 modulate = Color( 0, 1, 0.929412, 1 )
 tile_set = ExtResource( 8 )
 cell_size = Vector2( 8, 8 )
@@ -131,6 +164,8 @@ custom_fonts/normal_font = SubResource( 2 )
 text = "ENTER THE DOOR! ->"
 scroll_active = false
 
+[node name="Glitch" type="Node2D" parent="GameWindow"]
+
 [node name="Door" type="Node2D" parent="GameWindow"]
 position = Vector2( 232, 156 )
 
@@ -143,3 +178,15 @@ texture = ExtResource( 5 )
 
 [node name="Player" parent="GameWindow" instance=ExtResource( 3 )]
 position = Vector2( 34.1876, 232.046 )
+
+[node name="CRTTexture" type="TextureRect" parent="GameWindow"]
+material = SubResource( 6 )
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 249.0
+margin_bottom = 250.0
+texture = ExtResource( 11 )
+expand = true
+
+[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="SubWindow" method="_on_Player_shake"]
