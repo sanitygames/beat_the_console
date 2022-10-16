@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://resources/stage/map_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=2]
@@ -54,6 +54,9 @@ tracks/0/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.04, -19.8736, 0, -0.05, -20.8427, 0, 0 ),
 "times": PoolRealArray( 0, 0.1 )
 }
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 2.44345, 0.667282 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 5 )
@@ -137,7 +140,7 @@ tile_data = PoolIntArray( 65537, 0, 1, 65538, 0, 196610, 65539, 0, 196610, 65540
 [node name="Glitch" type="Node2D" parent="GameWindow"]
 
 [node name="Door" type="Node2D" parent="GameWindow"]
-position = Vector2( 232, 156 )
+position = Vector2( 212.888, 227.071 )
 
 [node name="Open" type="Sprite" parent="GameWindow/Door"]
 texture = ExtResource( 9 )
@@ -145,6 +148,14 @@ texture = ExtResource( 9 )
 [node name="Close" type="Sprite" parent="GameWindow/Door"]
 visible = false
 texture = ExtResource( 10 )
+
+[node name="IsEnter" type="Area2D" parent="GameWindow/Door"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Door/IsEnter"]
+position = Vector2( 0.269958, 11.0036 )
+shape = SubResource( 7 )
 
 [node name="Player" parent="GameWindow" instance=ExtResource( 2 )]
 position = Vector2( 34.1876, 232.046 )
@@ -158,5 +169,5 @@ margin_bottom = 250.0
 texture = ExtResource( 7 )
 expand = true
 
-[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]
 [connection signal="shake" from="GameWindow/Player" to="SubWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]

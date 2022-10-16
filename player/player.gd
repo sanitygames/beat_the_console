@@ -32,11 +32,13 @@ func _process(_delta):
 		if $CheckFloorCast.is_colliding() && !$CheckUpCast.is_colliding():
 			var tuned_x = (int(floor(position.x))/8) * 8 + 4
 			position.x = tuned_x
+			position.y = int(round(position.y))/8 * 8
 			var _pg = player_glitch.instance()
 			_pg.position = position
 			get_node("../Glitch").add_child(_pg)
 			position.y -= 16.0
 			velocity.y = -jump_power
+			$GlitchSound.play()
 
 			emit_signal("shake")
 
@@ -63,3 +65,25 @@ func _physics_process(delta):
 
 
 
+
+
+func _on_EnterDoor_area_entered(area:Area2D):
+	## test code
+	set_process(false)
+	set_physics_process(false)
+	$ClearSound.play()
+	var a = 1.0
+	while a > 0.0:
+		a -= 0.01
+		modulate.a = a
+		yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(1.0), "timeout")
+	Transition.transition_start(Global.now_stage)
+
+
+func _on_EnterNeedle_area_entered(area:Area2D):
+	print("game_over")
+
+
+func _on_EnterNeedle_body_entered(body:Node):
+	print("game_over")
