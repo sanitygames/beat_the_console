@@ -11,12 +11,13 @@ config_version=4
 [application]
 
 config/name="Beat the console v1.2"
-run/main_scene="res://player/PlayerDebugStage.tscn"
+run/main_scene="res://title/title.tscn"
 
 [autoload]
 
 Flag="*res://flag/flag.tscn"
 Global="*res://global/global.tscn"
+Transition="*res://transition/transition.tscn"
 
 [display]
 
