@@ -1,6 +1,9 @@
 extends Node
 
+export (PackedScene) var player_death_particle
+
 var now_stage = 0
+
 
 var scenes = [
 	"res://title/title.tscn",
@@ -11,6 +14,9 @@ var scenes = [
 func _input(event):
 	if event.is_action_pressed("retry"):
 		var _e = get_tree().reload_current_scene()
+
+	if event.is_action_pressed("next"):
+		transition_start()
 
 
 func transition_start():
@@ -24,3 +30,7 @@ func transition_start():
 	$Transition/AnimationPlayer.play("open")
 	var _e = get_tree().change_scene(scenes[now_stage])
 	yield($Transition/AnimationPlayer, "animation_finished")
+
+func get_destroy_effect():
+	var _p = player_death_particle.instance()
+	return _p

@@ -86,4 +86,13 @@ func _on_EnterNeedle_area_entered(area:Area2D):
 
 
 func _on_EnterNeedle_body_entered(body:Node):
-	print("game_over")
+	set_physics_process(false)
+	var destroy_effect = Global.get_destroy_effect()
+	get_parent().add_child(destroy_effect)
+	destroy_effect.position = position
+	destroy_effect.emitting = true
+	visible = false
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_tree().reload_current_scene()
+
+

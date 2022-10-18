@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://global/global.gd" type="Script" id=1]
 [ext_resource path="res://font/Silkscreen-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://global/player_death_particle.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=4]
 extra_spacing_char = -1
@@ -92,6 +93,7 @@ tracks/1/keys = {
 
 [node name="Global" type="Node"]
 script = ExtResource( 1 )
+player_death_particle = ExtResource( 3 )
 
 [node name="Transition" type="CanvasLayer" parent="."]
 
