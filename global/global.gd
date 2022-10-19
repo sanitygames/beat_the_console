@@ -1,5 +1,6 @@
 extends Node
 
+
 export (PackedScene) var player_death_particle
 
 var now_stage = 0
@@ -10,6 +11,7 @@ var scenes = [
 	# "res://stage/stage1.tscn",
 	"res://stage/stage2.tscn",
 	"res://stage/stage3.tscn",
+	"res://stage/stage4.tscn",
 ]
 func _input(event):
 	if event.is_action_pressed("retry"):

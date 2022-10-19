@@ -74,7 +74,7 @@ shader_param/clip_warp = false
 shader_param/vignette_intensity = -0.188
 shader_param/vignette_opacity = 0.156
 
-[node name="Stage1" type="Node2D"]
+[node name="Stage3" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_top = -128.0
@@ -136,5 +136,5 @@ margin_bottom = 250.0
 texture = ExtResource( 6 )
 expand = true
 
-[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]
 [connection signal="shake" from="GameWindow/Player" to="SubWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]
