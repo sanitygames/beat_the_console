@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://tilemap/tilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://font/Silkscreen-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://door/door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://key/key.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sub_window/sub_window.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game_window/game_window.gd" type="Script" id=7]
 [ext_resource path="res://shader/crt_shader.tres" type="Shader" id=10]
@@ -136,6 +137,8 @@ scroll_active = false
 
 [node name="Door" parent="GameWindow" instance=ExtResource( 4 )]
 position = Vector2( 224.266, 139.664 )
+
+[node name="Key" parent="GameWindow" instance=ExtResource( 5 )]
 
 [node name="Glitch" type="Node2D" parent="GameWindow"]
 

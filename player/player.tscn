@@ -48,7 +48,8 @@ collision_layer = 2
 collision/safe_margin = 0.01
 script = ExtResource( 4 )
 speed = 50.0
-g = 186.0
+jump_power = 70.0
+g = 220.0
 player_glitch = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

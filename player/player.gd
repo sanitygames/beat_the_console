@@ -6,7 +6,6 @@
 extends KinematicBody2D
 
 signal shake
-signal get_key
 
 export (float) var speed = 10.0
 export (float) var jump_power = 100.0
@@ -17,6 +16,10 @@ export (PackedScene) var player_glitch
 var input_direction = Vector2.ZERO
 var velocity = Vector2.ZERO
 
+func _ready():
+	for child in get_parent().get_children():
+		if child.is_in_group("key"):
+			var _e = connect("shake", child, "_on_player_shake")
 
 func _process(_delta):
 	if Input.is_action_pressed("left"):
@@ -68,6 +71,9 @@ func _physics_process(delta):
 
 func _on_EnterDoor_area_entered(_area:Area2D):
 	## test code
+	if _area.owner.is_close:
+		return
+	print("enter@player")
 	set_process(false)
 	set_physics_process(false)
 	$ClearSound.play()

@@ -56,7 +56,7 @@ points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
 points = PoolVector2Array( 8, 4.75, 1.3125, 4.875, 1.25, 8, 8, 8 )
 
 [sub_resource type="ConvexPolygonShape2D" id=18]
-points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
+points = PoolVector2Array( 7, 7, 1, 7, 1, 1, 7, 1 )
 
 [resource]
 0/name = "map.png 0"
