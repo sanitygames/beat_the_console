@@ -15,6 +15,7 @@ var scenes = [
 	"res://stage/stage5.tscn",
 	"res://stage/stage6.tscn",
 	"res://stage/stage7.tscn",
+	"res://stage/stage8.tscn",
 ]
 func _input(event):
 	if event.is_action_pressed("retry"):

@@ -12,7 +12,6 @@ func sub_key():
 		$Close.visible = false
 		$Open.visible = true
 		is_close = false
-	print(key_count)
 
 
 func add_key():
@@ -21,5 +20,3 @@ func add_key():
 		$Close.visible = true
 		$Open.visible = false
 		is_close = true
-
-		print(key_count)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://player/png/Player2.png" type="Texture" id=1]
-[ext_resource path="res://player/png/Player1.png" type="Texture" id=2]
-[ext_resource path="res://player/png/Player3.png" type="Texture" id=3]
+[ext_resource path="res://player/png/v3.png" type="Texture" id=1]
+[ext_resource path="res://player/png/v2.png" type="Texture" id=2]
+[ext_resource path="res://player/png/v22.png" type="Texture" id=3]
 [ext_resource path="res://player/player.gd" type="Script" id=4]
 [ext_resource path="res://player_glitch/player_glitch.tscn" type="PackedScene" id=5]
 [ext_resource path="res://resources/sound/clear.wav" type="AudioStream" id=6]
@@ -15,7 +15,7 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 1 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
@@ -25,15 +25,15 @@ animations = [ {
 "name": "jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 3.0
-height = 8.0
+radius = 2.5
+height = 9.0
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 1.19886
@@ -56,6 +56,7 @@ player_glitch = ExtResource( 5 )
 material = SubResource( 5 )
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
