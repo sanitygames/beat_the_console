@@ -34,7 +34,7 @@ func _on_key_body_entered(_body):
 
 
 func _on_player_shake():
-	if is_on_floor() && is_active:
+	if is_on_floor() && is_active && !$RayCast2D.is_colliding():
 		print("XXX")
 		var _gl = glitch.instance()
 		_gl.position = position
