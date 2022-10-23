@@ -1,0 +1,220 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://we/world_environment.gd" type="Script" id=1]
+[ext_resource path="res://sub_window/sub_window.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/sound/key.wav" type="AudioStream" id=3]
+[ext_resource path="res://font/Silkscreen-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://tilemap/stage_glitch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://shader/crt_shader.tres" type="Shader" id=6]
+[ext_resource path="res://tilemap/tilemap.gd" type="Script" id=7]
+[ext_resource path="res://crt_texture/crt_texture.gd" type="Script" id=8]
+[ext_resource path="res://player/get_coin_area.gd" type="Script" id=9]
+[ext_resource path="res://door/door.tscn" type="PackedScene" id=10]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://coin/coin.gd" type="Script" id=12]
+[ext_resource path="res://resources/png/coin1.png" type="Texture" id=13]
+[ext_resource path="res://resources/png/coin2.png" type="Texture" id=14]
+[ext_resource path="res://resources/png/coin3.png" type="Texture" id=15]
+[ext_resource path="res://resources/sound/CyberCafe.ogg" type="AudioStream" id=16]
+[ext_resource path="res://coin/coin_manager.gd" type="Script" id=17]
+[ext_resource path="res://resources/1x1.png" type="Texture" id=18]
+[ext_resource path="res://game_window/game_window.gd" type="Script" id=19]
+[ext_resource path="res://tilemap/tilemap.tscn" type="PackedScene" id=20]
+[ext_resource path="res://resources/png/coin4.png" type="Texture" id=21]
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 4.0
+
+[sub_resource type="Environment" id=8]
+background_mode = 4
+glow_enabled = true
+glow_strength = 0.76
+glow_bloom = 0.49
+glow_blend_mode = 1
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameWindow:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("GameWindow:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "shake"
+length = 0.1
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameWindow:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.04, -19.8736, 0, -0.05, -20.8427, 0, 0 ),
+"times": PoolRealArray( 0, 0.1 )
+}
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 4, 10 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 24
+extra_spacing_char = -3
+font_data = ExtResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 6 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.142
+shader_param/scanlines_width = 0.25
+shader_param/grille_opacity = 0.3
+shader_param/resolution = Vector2( 512, 512 )
+shader_param/pixelate = false
+shader_param/roll = true
+shader_param/roll_speed = 16.386
+shader_param/roll_size = 7.424
+shader_param/roll_variation = 3.323
+shader_param/distort_intensity = 0.0
+shader_param/noise_opacity = 0.0
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.0
+shader_param/aberration = 0.001
+shader_param/brightness = 1.4
+shader_param/discolor = true
+shader_param/warp_amount = 0.05
+shader_param/clip_warp = false
+shader_param/vignette_intensity = -0.188
+shader_param/vignette_opacity = 0.156
+
+[node name="Stage8" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = -128.0
+margin_right = 384.0
+margin_bottom = 384.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SubWindow" parent="." instance=ExtResource( 2 )]
+
+[node name="GameWindow" type="Node2D" parent="."]
+script = ExtResource( 19 )
+
+[node name="CoinManager" type="Node" parent="GameWindow"]
+script = ExtResource( 17 )
+
+[node name="Coin" type="RigidBody2D" parent="GameWindow"]
+position = Vector2( 152, 112 )
+collision_layer = 256
+collision_mask = 257
+mode = 2
+script = ExtResource( 12 )
+
+[node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin"]
+frames = SubResource( 9 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin"]
+shape = SubResource( 11 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameWindow"]
+environment = SubResource( 8 )
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameWindow"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 4 )
+anims/shake = SubResource( 5 )
+
+[node name="TileMap" parent="GameWindow" instance=ExtResource( 20 )]
+modulate = Color( 0.14902, 1, 0, 1 )
+tile_data = PoolIntArray( 262148, 0, 1, 262149, 0, 196610, 262150, 0, 196610, 262151, 0, 196610, 262152, 0, 196610, 262153, 0, 196610, 262154, 0, 196610, 262155, 0, 196610, 262156, 0, 196610, 262157, 0, 196610, 262158, 0, 196610, 262159, 0, 196610, 262160, 0, 196610, 262161, 0, 196610, 262162, 0, 196610, 262163, 0, 196610, 262164, 0, 196610, 262165, 0, 196610, 262166, 0, 196610, 262167, 0, 196610, 262168, 0, 196610, 262169, 0, 196610, 262170, 0, 196610, 262171, 0, 3, 327684, 0, 65536, 327707, 0, 65536, 393220, 0, 65536, 393243, 0, 65536, 458756, 0, 65536, 458779, 0, 65536, 524292, 0, 65536, 524315, 0, 65536, 589828, 0, 65536, 589851, 0, 65536, 655364, 0, 65536, 655387, 0, 65536, 720900, 0, 65536, 720923, 0, 65536, 786436, 0, 65536, 786459, 0, 65536, 851972, 0, 65536, 851995, 0, 65536, 917508, 0, 65536, 917531, 0, 65536, 983044, 0, 65536, 983067, 0, 65536, 1048580, 0, 65536, 1048603, 0, 65536, 1114116, 0, 65536, 1114139, 0, 65536, 1179652, 0, 65536, 1179675, 0, 65536, 1245188, 0, 65536, 1245211, 0, 65536, 1310724, 0, 65536, 1310747, 0, 65536, 1376260, 0, 65536, 1376283, 0, 65536, 1441796, 0, 65536, 1441819, 0, 65536, 1507332, 0, 65536, 1507345, 0, 1, 1507346, 0, 2, 1507347, 0, 3, 1507355, 0, 65536, 1572868, 0, 65536, 1572879, 0, 1, 1572880, 0, 2, 1572881, 0, 65538, 1572882, 0, 65538, 1572883, 0, 65538, 1572884, 0, 3, 1572891, 0, 65536, 1638404, 0, 65536, 1638415, 0, 65537, 1638416, 0, 65538, 1638417, 0, 65538, 1638418, 0, 65538, 1638419, 0, 65538, 1638420, 0, 65538, 1638421, 0, 2, 1638422, 0, 2, 1638423, 0, 3, 1638427, 0, 65536, 1703940, 0, 65536, 1703944, 0, 1, 1703945, 0, 2, 1703946, 0, 2, 1703947, 0, 2, 1703948, 0, 2, 1703949, 0, 2, 1703950, 0, 2, 1703951, 0, 65538, 1703952, 0, 65538, 1703953, 0, 65538, 1703954, 0, 65538, 1703955, 0, 65538, 1703956, 0, 65538, 1703957, 0, 65538, 1703958, 0, 65538, 1703959, 0, 65538, 1703960, 0, 2, 1703961, 0, 3, 1703963, 0, 65536, 1769476, 0, 131073, 1769477, 0, 196610, 1769478, 0, 196610, 1769479, 0, 196610, 1769480, 0, 131074, 1769481, 0, 131074, 1769482, 0, 131074, 1769483, 0, 131074, 1769484, 0, 131074, 1769485, 0, 131074, 1769486, 0, 131074, 1769487, 0, 131074, 1769488, 0, 131074, 1769489, 0, 131074, 1769490, 0, 131074, 1769491, 0, 131074, 1769492, 0, 131074, 1769493, 0, 131074, 1769494, 0, 131074, 1769495, 0, 131074, 1769496, 0, 131074, 1769497, 0, 131074, 1769498, 0, 196610, 1769499, 0, 131075 )
+script = ExtResource( 7 )
+stage_glitch = ExtResource( 5 )
+
+[node name="Needle" parent="GameWindow" instance=ExtResource( 20 )]
+modulate = Color( 1, 0.0235294, 0, 1 )
+collision_layer = 4
+tile_data = PoolIntArray(  )
+
+[node name="Door" parent="GameWindow" instance=ExtResource( 10 )]
+visible = false
+position = Vector2( 236, 44 )
+
+[node name="Glitch" type="Node2D" parent="GameWindow"]
+
+[node name="Player" parent="GameWindow" groups=["player"] instance=ExtResource( 11 )]
+position = Vector2( 48, 208 )
+
+[node name="Area2D" type="Area2D" parent="GameWindow/Player"]
+collision_layer = 0
+collision_mask = 256
+script = ExtResource( 9 )
+
+[node name="CoinGetSound" type="AudioStreamPlayer" parent="GameWindow/Player/Area2D"]
+stream = ExtResource( 3 )
+volume_db = -19.424
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Player/Area2D"]
+shape = SubResource( 12 )
+
+[node name="Label" type="Label" parent="GameWindow"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 212.0
+margin_bottom = 105.0
+custom_fonts/font = SubResource( 10 )
+text = "THANK YOU 
+FOR PLAYING!!"
+
+[node name="CRTTexture" type="TextureRect" parent="GameWindow"]
+material = SubResource( 6 )
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 250.0
+margin_bottom = 250.0
+texture = ExtResource( 18 )
+expand = true
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -10.0
+autoplay = true
+
+[connection signal="shake" from="GameWindow/Player" to="SubWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/WorldEnvironment" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/TileMap" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/CRTTexture" method="_on_Player_shake"]
+[connection signal="body_entered" from="GameWindow/Player/Area2D" to="GameWindow/Player/Area2D" method="_on_Area2D_body_entered"]

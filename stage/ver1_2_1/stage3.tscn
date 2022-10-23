@@ -1,0 +1,145 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://door/door.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/1x1.png" type="Texture" id=3]
+[ext_resource path="res://game_window/game_window.gd" type="Script" id=4]
+[ext_resource path="res://tilemap/tilemap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sub_window/sub_window.tscn" type="PackedScene" id=6]
+[ext_resource path="res://tilemap/stage_glitch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://shader/crt_shader.tres" type="Shader" id=8]
+[ext_resource path="res://tilemap/tilemap.gd" type="Script" id=9]
+[ext_resource path="res://crt_texture/crt_texture.gd" type="Script" id=10]
+[ext_resource path="res://we/world_environment.gd" type="Script" id=11]
+
+[sub_resource type="Environment" id=8]
+background_mode = 4
+glow_enabled = true
+glow_strength = 0.76
+glow_bloom = 0.49
+glow_blend_mode = 1
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameWindow:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("GameWindow:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "shake"
+length = 0.1
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameWindow:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.04, -19.8736, 0, -0.05, -20.8427, 0, 0 ),
+"times": PoolRealArray( 0, 0.1 )
+}
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 8 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.142
+shader_param/scanlines_width = 0.25
+shader_param/grille_opacity = 0.3
+shader_param/resolution = Vector2( 512, 512 )
+shader_param/pixelate = false
+shader_param/roll = true
+shader_param/roll_speed = 16.386
+shader_param/roll_size = 7.424
+shader_param/roll_variation = 3.323
+shader_param/distort_intensity = 0.0
+shader_param/noise_opacity = 0.0
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.0
+shader_param/aberration = 0.001
+shader_param/brightness = 1.4
+shader_param/discolor = true
+shader_param/warp_amount = 0.05
+shader_param/clip_warp = false
+shader_param/vignette_intensity = -0.188
+shader_param/vignette_opacity = 0.156
+
+[node name="Stage3" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = -128.0
+margin_right = 384.0
+margin_bottom = 384.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SubWindow" parent="." instance=ExtResource( 6 )]
+
+[node name="GameWindow" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameWindow"]
+environment = SubResource( 8 )
+script = ExtResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameWindow"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 4 )
+anims/shake = SubResource( 5 )
+
+[node name="TileMap" parent="GameWindow" instance=ExtResource( 5 )]
+modulate = Color( 0, 1, 0.929412, 1 )
+tile_data = PoolIntArray( 393218, 0, 1, 393219, 0, 196610, 393220, 0, 196610, 393221, 0, 196610, 393222, 0, 196610, 393223, 0, 196610, 393224, 0, 196610, 393225, 0, 196610, 393226, 0, 196610, 393227, 0, 196610, 393228, 0, 196610, 393229, 0, 196610, 393230, 0, 196610, 393231, 0, 196610, 393232, 0, 196610, 393233, 0, 196610, 393234, 0, 196610, 393235, 0, 196610, 393236, 0, 196610, 393237, 0, 2, 393238, 0, 2, 393239, 0, 2, 393240, 0, 2, 393241, 0, 2, 393242, 0, 2, 393243, 0, 2, 393244, 0, 3, 458754, 0, 65536, 458773, 0, 65537, 458774, 0, 65538, 458775, 0, 65538, 458776, 0, 65538, 458777, 0, 65538, 458778, 0, 65538, 458779, 0, 65538, 458780, 0, 65539, 524290, 0, 65536, 524309, 0, 65537, 524310, 0, 65538, 524311, 0, 65538, 524312, 0, 65538, 524313, 0, 65538, 524314, 0, 65538, 524315, 0, 65538, 524316, 0, 65539, 589826, 0, 65536, 589828, 0, 1, 589829, 0, 2, 589830, 0, 2, 589831, 0, 2, 589832, 0, 2, 589833, 0, 2, 589834, 0, 2, 589835, 0, 2, 589836, 0, 2, 589837, 0, 2, 589838, 0, 2, 589839, 0, 2, 589840, 0, 2, 589841, 0, 2, 589842, 0, 3, 589845, 0, 65537, 589846, 0, 65538, 589847, 0, 65538, 589848, 0, 65538, 589849, 0, 65538, 589850, 0, 65538, 589851, 0, 65538, 589852, 0, 65539, 655362, 0, 65536, 655364, 0, 131073, 655365, 0, 131074, 655366, 0, 131074, 655367, 0, 131074, 655368, 0, 131074, 655369, 0, 131074, 655370, 0, 131074, 655371, 0, 131074, 655372, 0, 131074, 655373, 0, 131074, 655374, 0, 131074, 655375, 0, 131074, 655376, 0, 131074, 655377, 0, 131074, 655378, 0, 131075, 655381, 0, 65537, 655382, 0, 65538, 655383, 0, 65538, 655384, 0, 131074, 655385, 0, 131074, 655386, 0, 131074, 655387, 0, 131074, 655388, 0, 65539, 720898, 0, 65536, 720917, 0, 131073, 720918, 0, 131074, 720919, 0, 131075, 720924, 0, 65536, 786434, 0, 65536, 786444, 0, 196609, 786445, 0, 196610, 786446, 0, 196610, 786447, 0, 196610, 786448, 0, 3, 786460, 0, 65536, 851970, 0, 65536, 851974, 0, 1, 851975, 0, 2, 851976, 0, 2, 851977, 0, 2, 851978, 0, 3, 851984, 0, 65536, 851993, 0, 0, 851996, 0, 65536, 917506, 0, 65536, 917510, 0, 131073, 917511, 0, 131074, 917512, 0, 65538, 917513, 0, 65538, 917514, 0, 65539, 917520, 0, 65537, 917521, 0, 2, 917522, 0, 2, 917523, 0, 2, 917524, 0, 2, 917525, 0, 2, 917526, 0, 196610, 917527, 0, 196611, 917529, 0, 131072, 917532, 0, 65536, 983042, 0, 65536, 983048, 0, 65537, 983049, 0, 131074, 983050, 0, 131074, 983051, 0, 196610, 983052, 0, 196610, 983053, 0, 196611, 983056, 0, 131073, 983057, 0, 131074, 983058, 0, 131074, 983059, 0, 131074, 983060, 0, 131074, 983061, 0, 131075, 983068, 0, 65536, 1048578, 0, 65536, 1048584, 0, 65536, 1048604, 0, 65536, 1114114, 0, 65536, 1114120, 0, 65536, 1114140, 0, 65536, 1179650, 0, 65537, 1179651, 0, 196610, 1179652, 0, 196610, 1179653, 0, 196610, 1179654, 0, 196611, 1179656, 0, 65536, 1179659, 0, 196609, 1179660, 0, 196610, 1179661, 0, 196610, 1179662, 0, 3, 1179664, 0, 196609, 1179665, 0, 196610, 1179666, 0, 196611, 1179669, 0, 0, 1179671, 0, 0, 1179673, 0, 1, 1179674, 0, 2, 1179675, 0, 2, 1179676, 0, 65539, 1245186, 0, 65536, 1245192, 0, 65536, 1245198, 0, 65536, 1245205, 0, 65536, 1245207, 0, 131072, 1245209, 0, 65537, 1245210, 0, 65538, 1245211, 0, 65538, 1245212, 0, 65539, 1310722, 0, 65536, 1310728, 0, 65536, 1310734, 0, 65536, 1310741, 0, 65536, 1310745, 0, 65537, 1310746, 0, 65538, 1310747, 0, 65538, 1310748, 0, 65539, 1376258, 0, 65536, 1376260, 0, 1, 1376261, 0, 196610, 1376262, 0, 196610, 1376263, 0, 196610, 1376264, 0, 131074, 1376265, 0, 196610, 1376266, 0, 196610, 1376267, 0, 196611, 1376270, 0, 131073, 1376271, 0, 196610, 1376272, 0, 196610, 1376273, 0, 196610, 1376274, 0, 196611, 1376277, 0, 65536, 1376279, 0, 196609, 1376280, 0, 196610, 1376281, 0, 131074, 1376282, 0, 131074, 1376283, 0, 65538, 1376284, 0, 65539, 1441794, 0, 65536, 1441796, 0, 65536, 1441813, 0, 65536, 1441819, 0, 65537, 1441820, 0, 65539, 1507330, 0, 65536, 1507332, 0, 65536, 1507349, 0, 65536, 1507355, 0, 65537, 1507356, 0, 65539, 1572866, 0, 65536, 1572868, 0, 131073, 1572869, 0, 196610, 1572870, 0, 196610, 1572871, 0, 196610, 1572872, 0, 196610, 1572873, 0, 196611, 1572876, 0, 196609, 1572877, 0, 196610, 1572878, 0, 196610, 1572879, 0, 196610, 1572880, 0, 196610, 1572881, 0, 196610, 1572882, 0, 196611, 1572885, 0, 131073, 1572886, 0, 196610, 1572887, 0, 196610, 1572888, 0, 196611, 1572891, 0, 65537, 1572892, 0, 65539, 1638402, 0, 65536, 1638427, 0, 65537, 1638428, 0, 65539, 1703938, 0, 65536, 1703963, 0, 65537, 1703964, 0, 65539, 1769474, 0, 131073, 1769475, 0, 196610, 1769476, 0, 196610, 1769477, 0, 196610, 1769478, 0, 196610, 1769479, 0, 196610, 1769480, 0, 196610, 1769481, 0, 196610, 1769482, 0, 196610, 1769483, 0, 196610, 1769484, 0, 196610, 1769485, 0, 196610, 1769486, 0, 196610, 1769487, 0, 196610, 1769488, 0, 196610, 1769489, 0, 196610, 1769490, 0, 196610, 1769491, 0, 196610, 1769492, 0, 196610, 1769493, 0, 196610, 1769494, 0, 196610, 1769495, 0, 196610, 1769496, 0, 196610, 1769497, 0, 196610, 1769498, 0, 196610, 1769499, 0, 131074, 1769500, 0, 131075 )
+script = ExtResource( 9 )
+stage_glitch = ExtResource( 7 )
+
+[node name="Needle" parent="GameWindow" instance=ExtResource( 5 )]
+modulate = Color( 1, 0.0235294, 0, 1 )
+collision_layer = 4
+tile_data = PoolIntArray( 786449, 2, 0, 851985, 2, 0, 983046, 2, 0, 983047, 2, 0, 983062, 2, 0, 983063, 2, 0, 983065, 2, 0, 1048601, 2, 0, 1114137, 2, 0, 1441807, 2, 0, 1441808, 2, 0, 1441809, 2, 0 )
+
+[node name="Door" parent="GameWindow" instance=ExtResource( 1 )]
+position = Vector2( 216, 132 )
+
+[node name="Glitch" type="Node2D" parent="GameWindow"]
+
+[node name="Player" parent="GameWindow" instance=ExtResource( 2 )]
+position = Vector2( 44, 184 )
+
+[node name="CRTTexture" type="TextureRect" parent="GameWindow"]
+material = SubResource( 6 )
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 250.0
+margin_bottom = 250.0
+texture = ExtResource( 3 )
+expand = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="shake" from="GameWindow/Player" to="SubWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/WorldEnvironment" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/TileMap" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/CRTTexture" method="_on_Player_shake"]

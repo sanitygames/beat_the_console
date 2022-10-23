@@ -1,0 +1,202 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://door/door.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/1x1.png" type="Texture" id=3]
+[ext_resource path="res://game_window/game_window.gd" type="Script" id=4]
+[ext_resource path="res://tilemap/tilemap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sub_window/sub_window.tscn" type="PackedScene" id=6]
+[ext_resource path="res://font/Silkscreen-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://tilemap/stage_glitch.tscn" type="PackedScene" id=8]
+[ext_resource path="res://shader/crt_shader.tres" type="Shader" id=9]
+[ext_resource path="res://tilemap/tilemap.gd" type="Script" id=10]
+[ext_resource path="res://crt_texture/crt_texture.gd" type="Script" id=11]
+[ext_resource path="res://resources/sound/CyberCafe.ogg" type="AudioStream" id=12]
+[ext_resource path="res://bgm/bgm.gd" type="Script" id=13]
+[ext_resource path="res://we/world_environment.gd" type="Script" id=14]
+
+[sub_resource type="Environment" id=8]
+background_mode = 4
+glow_enabled = true
+glow_strength = 0.76
+glow_bloom = 0.49
+glow_blend_mode = 1
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameWindow:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("GameWindow:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "shake"
+length = 0.1
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameWindow:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.04, -19.8736, 0, -0.05, -20.8427, 0, 0 ),
+"times": PoolRealArray( 0, 0.1 )
+}
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+extra_spacing_char = -5
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+extra_spacing_char = -1
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=7]
+extra_spacing_char = -2
+font_data = ExtResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 9 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.142
+shader_param/scanlines_width = 0.25
+shader_param/grille_opacity = 0.3
+shader_param/resolution = Vector2( 512, 512 )
+shader_param/pixelate = false
+shader_param/roll = true
+shader_param/roll_speed = 16.386
+shader_param/roll_size = 7.424
+shader_param/roll_variation = 3.323
+shader_param/distort_intensity = 0.0
+shader_param/noise_opacity = 0.0
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.0
+shader_param/aberration = 0.001
+shader_param/brightness = 1.4
+shader_param/discolor = true
+shader_param/warp_amount = 0.05
+shader_param/clip_warp = false
+shader_param/vignette_intensity = -0.188
+shader_param/vignette_opacity = 0.156
+
+[node name="Stage0" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = -128.0
+margin_right = 384.0
+margin_bottom = 384.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SubWindow" parent="." instance=ExtResource( 6 )]
+
+[node name="GameWindow" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameWindow"]
+environment = SubResource( 8 )
+script = ExtResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameWindow"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 4 )
+anims/shake = SubResource( 5 )
+
+[node name="TileMap" parent="GameWindow" instance=ExtResource( 5 )]
+modulate = Color( 0, 1, 0.929412, 1 )
+tile_data = PoolIntArray( 196610, 0, 1, 196611, 0, 196610, 196612, 0, 196610, 196613, 0, 196610, 196614, 0, 196610, 196615, 0, 196610, 196616, 0, 196610, 196617, 0, 196610, 196618, 0, 196610, 196619, 0, 196610, 196620, 0, 196610, 196621, 0, 196610, 196622, 0, 196610, 196623, 0, 196610, 196624, 0, 196610, 196625, 0, 196610, 196626, 0, 196610, 196627, 0, 196610, 196628, 0, 196610, 196629, 0, 196610, 196630, 0, 196610, 196631, 0, 196610, 196632, 0, 196610, 196633, 0, 196610, 196634, 0, 196610, 196635, 0, 196610, 196636, 0, 196610, 196637, 0, 3, 262146, 0, 65536, 262173, 0, 65536, 327682, 0, 65536, 327709, 0, 65536, 393218, 0, 65536, 393245, 0, 65536, 458754, 0, 65536, 458781, 0, 65536, 524290, 0, 65536, 524317, 0, 65536, 589826, 0, 65536, 589853, 0, 65536, 655362, 0, 65536, 655389, 0, 65536, 720898, 0, 65536, 720925, 0, 65536, 786434, 0, 65536, 786461, 0, 65536, 851970, 0, 65536, 851997, 0, 65536, 917506, 0, 65536, 917533, 0, 65536, 983042, 0, 65536, 983069, 0, 65536, 1048578, 0, 65536, 1048605, 0, 65536, 1114114, 0, 65536, 1114141, 0, 65536, 1179650, 0, 65536, 1179677, 0, 65536, 1245186, 0, 65537, 1245187, 0, 2, 1245188, 0, 2, 1245189, 0, 2, 1245190, 0, 3, 1245213, 0, 65536, 1310722, 0, 65537, 1310723, 0, 65538, 1310724, 0, 65538, 1310725, 0, 65538, 1310726, 0, 65538, 1310727, 0, 3, 1310749, 0, 65536, 1376258, 0, 65537, 1376259, 0, 65538, 1376260, 0, 65538, 1376261, 0, 65538, 1376262, 0, 65538, 1376263, 0, 65538, 1376264, 0, 3, 1376285, 0, 65536, 1441794, 0, 65537, 1441795, 0, 65538, 1441796, 0, 65538, 1441797, 0, 65538, 1441798, 0, 65538, 1441799, 0, 65538, 1441800, 0, 65538, 1441801, 0, 3, 1441809, 0, 1, 1441810, 0, 2, 1441811, 0, 2, 1441812, 0, 2, 1441813, 0, 2, 1441814, 0, 2, 1441815, 0, 2, 1441816, 0, 2, 1441817, 0, 2, 1441818, 0, 2, 1441819, 0, 2, 1441820, 0, 2, 1441821, 0, 65539, 1507330, 0, 131073, 1507331, 0, 131074, 1507332, 0, 131074, 1507333, 0, 131074, 1507334, 0, 131074, 1507335, 0, 131074, 1507336, 0, 131074, 1507337, 0, 131074, 1507338, 0, 196610, 1507339, 0, 196610, 1507340, 0, 196610, 1507341, 0, 196610, 1507342, 0, 196610, 1507343, 0, 196610, 1507344, 0, 196610, 1507345, 0, 131074, 1507346, 0, 131074, 1507347, 0, 131074, 1507348, 0, 131074, 1507349, 0, 131074, 1507350, 0, 131074, 1507351, 0, 131074, 1507352, 0, 131074, 1507353, 0, 131074, 1507354, 0, 131074, 1507355, 0, 131074, 1507356, 0, 131074, 1507357, 0, 131075 )
+script = ExtResource( 10 )
+stage_glitch = ExtResource( 8 )
+
+[node name="Title" type="Label" parent="GameWindow"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0489
+margin_top = 33.5161
+margin_right = 224.049
+margin_bottom = 118.516
+custom_fonts/font = SubResource( 1 )
+text = "BEAT
+THE CONSOLE"
+
+[node name="Start" type="RichTextLabel" parent="GameWindow"]
+margin_left = 140.0
+margin_top = 152.0
+margin_right = 298.001
+margin_bottom = 174.0
+custom_fonts/normal_font = SubResource( 2 )
+text = "ENTER THE DOOR! ->"
+scroll_active = false
+
+[node name="Start2" type="RichTextLabel" parent="GameWindow"]
+margin_left = 48.0
+margin_top = 136.0
+margin_right = 206.001
+margin_bottom = 158.0
+custom_fonts/normal_font = SubResource( 2 )
+text = "<- You have a broken leg."
+scroll_active = false
+
+[node name="MadeBy" type="RichTextLabel" parent="GameWindow"]
+margin_left = 32.0
+margin_top = 196.0
+margin_right = 222.0
+margin_bottom = 218.0
+custom_fonts/normal_font = SubResource( 7 )
+text = "MADE BY SANITY GAMES"
+scroll_active = false
+
+[node name="Door" parent="GameWindow" instance=ExtResource( 1 )]
+position = Vector2( 224.266, 164 )
+
+[node name="Glitch" type="Node2D" parent="GameWindow"]
+
+[node name="Player" parent="GameWindow" instance=ExtResource( 2 )]
+position = Vector2( 35.1876, 144 )
+
+[node name="CRTTexture" type="TextureRect" parent="GameWindow"]
+material = SubResource( 6 )
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 250.0
+margin_bottom = 250.0
+texture = ExtResource( 3 )
+expand = true
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameWindow"]
+stream = ExtResource( 12 )
+volume_db = -10.0
+autoplay = true
+script = ExtResource( 13 )
+
+[connection signal="door_entered" from="GameWindow/Player" to="GameWindow/AudioStreamPlayer" method="_on_Player_door_entered"]
+[connection signal="shake" from="GameWindow/Player" to="SubWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/WorldEnvironment" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/TileMap" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/CRTTexture" method="_on_Player_shake"]

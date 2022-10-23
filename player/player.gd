@@ -6,6 +6,7 @@
 extends KinematicBody2D
 
 signal shake
+signal door_entered
 
 export (float) var speed = 10.0
 export (float) var jump_power = 100.0
@@ -16,8 +17,10 @@ export (PackedScene) var player_glitch
 var input_direction = Vector2.ZERO
 var velocity = Vector2.ZERO
 
-# onready var game_window = get_node("../")
-# onready var sub_window = get_node("../../SubWindow")
+func _ready():
+	for child in get_parent().get_children():
+		if child.is_in_group("key"):
+			var _e = connect("shake", child, "_on_player_shake")
 
 func _process(_delta):
 	if Input.is_action_pressed("left"):
@@ -67,8 +70,12 @@ func _physics_process(delta):
 
 
 
-func _on_EnterDoor_area_entered(area:Area2D):
+func _on_EnterDoor_area_entered(_area:Area2D):
 	## test code
+	emit_signal("door_entered")
+	if _area.owner.is_close:
+		return
+	print("enter@player")
 	set_process(false)
 	set_physics_process(false)
 	$ClearSound.play()
@@ -81,9 +88,16 @@ func _on_EnterDoor_area_entered(area:Area2D):
 	Global.transition_start()
 
 
-func _on_EnterNeedle_area_entered(area:Area2D):
-	print("game_over")
+
+func _on_EnterNeedle_body_entered(_body:Node):
+	$DeathSound.play()
+	set_physics_process(false)
+	var destroy_effect = Global.get_destroy_effect()
+	get_parent().add_child(destroy_effect)
+	destroy_effect.position = position
+	destroy_effect.emitting = true
+	visible = false
+	yield(get_tree().create_timer(1.0), "timeout")
+	var _e = get_tree().reload_current_scene()
 
 
-func _on_EnterNeedle_body_entered(body:Node):
-	print("game_over")

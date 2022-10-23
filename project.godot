@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Beat the console v1.2"
-run/main_scene="res://title/title.tscn"
+run/main_scene="res://stage/ver1_2_1/stage0.tscn"
 
 [autoload]
 
@@ -104,6 +104,11 @@ glitch={
 retry={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+next={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":78,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
