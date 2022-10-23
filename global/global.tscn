@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://global/global.gd" type="Script" id=1]
-[ext_resource path="res://font/Silkscreen-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://10_resource/font/Silkscreen-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://global/player_death_particle.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=4]

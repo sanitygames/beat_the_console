@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://sub_window/hit_console.gd" type="Script" id=1]
-[ext_resource path="res://resources/stage/map_tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://hand/png/hiteffect.png" type="Texture" id=3]
-[ext_resource path="res://console/png/consolet.png" type="Texture" id=4]
-[ext_resource path="res://hand/png/hand1.png" type="Texture" id=5]
-[ext_resource path="res://font/Silkscreen-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://hand/png/hand2.png" type="Texture" id=7]
+[ext_resource path="res://10_resource/tileset/map_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://10_resource/png/console/hiteffect.png" type="Texture" id=3]
+[ext_resource path="res://10_resource/png/console/console.png" type="Texture" id=4]
+[ext_resource path="res://10_resource/png/console/hand1.png" type="Texture" id=5]
+[ext_resource path="res://10_resource/font/Silkscreen-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://10_resource/png/console/hand2.png" type="Texture" id=7]
 [ext_resource path="res://sub_window/sub_window.gd" type="Script" id=8]
-[ext_resource path="res://hand/png/hand3.png" type="Texture" id=9]
+[ext_resource path="res://10_resource/png/console/hand3.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=3]
 size = 8

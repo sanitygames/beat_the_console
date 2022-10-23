@@ -9,5 +9,5 @@ func _process(delta):
 
 
 func _on_Player_shake():
-	value = 0.3
+	value = 0.1
 

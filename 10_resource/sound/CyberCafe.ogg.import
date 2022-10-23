@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/CyberCafe.ogg-e33b2033fdfd5d9b9e82c940cf7cf1a6.oggstr"
+
+[deps]
+
+source_file="res://10_resource/sound/CyberCafe.ogg"
+dest_files=[ "res://.import/CyberCafe.ogg-e33b2033fdfd5d9b9e82c940cf7cf1a6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

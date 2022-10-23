@@ -1,26 +1,26 @@
 [gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://we/world_environment.gd" type="Script" id=1]
+[ext_resource path="res://world_environment/world_environment.gd" type="Script" id=1]
 [ext_resource path="res://sub_window/sub_window.tscn" type="PackedScene" id=2]
-[ext_resource path="res://resources/sound/key.wav" type="AudioStream" id=3]
-[ext_resource path="res://font/Silkscreen-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://10_resource/sound/key.wav" type="AudioStream" id=3]
+[ext_resource path="res://10_resource/font/Silkscreen-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://tilemap/stage_glitch.tscn" type="PackedScene" id=5]
-[ext_resource path="res://shader/crt_shader.tres" type="Shader" id=6]
+[ext_resource path="res://10_resource/shader/crt_shader.tres" type="Shader" id=6]
 [ext_resource path="res://tilemap/tilemap.gd" type="Script" id=7]
 [ext_resource path="res://crt_texture/crt_texture.gd" type="Script" id=8]
 [ext_resource path="res://player/get_coin_area.gd" type="Script" id=9]
 [ext_resource path="res://door/door.tscn" type="PackedScene" id=10]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=11]
 [ext_resource path="res://coin/coin.gd" type="Script" id=12]
-[ext_resource path="res://resources/png/coin1.png" type="Texture" id=13]
-[ext_resource path="res://resources/png/coin2.png" type="Texture" id=14]
-[ext_resource path="res://resources/png/coin3.png" type="Texture" id=15]
-[ext_resource path="res://resources/sound/CyberCafe.ogg" type="AudioStream" id=16]
+[ext_resource path="res://10_resource/png/coin/coin1.png" type="Texture" id=13]
+[ext_resource path="res://10_resource/png/coin/coin2.png" type="Texture" id=14]
+[ext_resource path="res://10_resource/png/coin/coin3.png" type="Texture" id=15]
+[ext_resource path="res://10_resource/sound/CyberCafe.ogg" type="AudioStream" id=16]
 [ext_resource path="res://coin/coin_manager.gd" type="Script" id=17]
-[ext_resource path="res://resources/1x1.png" type="Texture" id=18]
+[ext_resource path="res://10_resource/png/1x1.png" type="Texture" id=18]
 [ext_resource path="res://game_window/game_window.gd" type="Script" id=19]
 [ext_resource path="res://tilemap/tilemap.tscn" type="PackedScene" id=20]
-[ext_resource path="res://resources/png/coin4.png" type="Texture" id=21]
+[ext_resource path="res://10_resource/png/coin/coin4.png" type="Texture" id=21]
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
@@ -138,6 +138,7 @@ script = ExtResource( 12 )
 
 [node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin"]
 frames = SubResource( 9 )
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin"]
@@ -152,7 +153,7 @@ script = ExtResource( 12 )
 
 [node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin2"]
 frames = SubResource( 9 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin2"]
@@ -167,7 +168,7 @@ script = ExtResource( 12 )
 
 [node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin3"]
 frames = SubResource( 9 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin3"]
@@ -182,7 +183,7 @@ script = ExtResource( 12 )
 
 [node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin4"]
 frames = SubResource( 9 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin4"]
@@ -197,7 +198,7 @@ script = ExtResource( 12 )
 
 [node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin5"]
 frames = SubResource( 9 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin5"]
@@ -212,7 +213,6 @@ script = ExtResource( 12 )
 
 [node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin6"]
 frames = SubResource( 9 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin6"]
@@ -227,7 +227,6 @@ script = ExtResource( 12 )
 
 [node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin7"]
 frames = SubResource( 9 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin7"]

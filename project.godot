@@ -12,10 +12,10 @@ config_version=4
 
 config/name="Beat the console v1.2"
 run/main_scene="res://stage/ver1_2_1/stage0.tscn"
+config/icon="res://10_resource/png/icon.png"
 
 [autoload]
 
-Flag="*res://flag/flag.tscn"
 Global="*res://global/global.tscn"
 
 [display]
