@@ -3,7 +3,7 @@ extends Node2D
 var key_count = 0
 var is_close = false
 
-func on_key_body_entered(_body):
+func on_key_body_entered():
 	sub_key()
 
 func sub_key():

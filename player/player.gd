@@ -6,6 +6,7 @@
 extends KinematicBody2D
 
 signal shake
+signal door_entered
 
 export (float) var speed = 10.0
 export (float) var jump_power = 100.0
@@ -71,6 +72,7 @@ func _physics_process(delta):
 
 func _on_EnterDoor_area_entered(_area:Area2D):
 	## test code
+	emit_signal("door_entered")
 	if _area.owner.is_close:
 		return
 	print("enter@player")
@@ -88,6 +90,7 @@ func _on_EnterDoor_area_entered(_area:Area2D):
 
 
 func _on_EnterNeedle_body_entered(_body:Node):
+	$DeathSound.play()
 	set_physics_process(false)
 	var destroy_effect = Global.get_destroy_effect()
 	get_parent().add_child(destroy_effect)

@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Beat the console v1.2"
-run/main_scene="res://title/title.tscn"
+run/main_scene="res://stage/ver1_2_1/stage0.tscn"
 
 [autoload]
 

@@ -1,0 +1,149 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://door/door.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/1x1.png" type="Texture" id=3]
+[ext_resource path="res://game_window/game_window.gd" type="Script" id=4]
+[ext_resource path="res://tilemap/tilemap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sub_window/sub_window.tscn" type="PackedScene" id=6]
+[ext_resource path="res://tilemap/stage_glitch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://shader/crt_shader.tres" type="Shader" id=8]
+[ext_resource path="res://tilemap/tilemap.gd" type="Script" id=9]
+[ext_resource path="res://crt_texture/crt_texture.gd" type="Script" id=10]
+[ext_resource path="res://key/key.tscn" type="PackedScene" id=11]
+[ext_resource path="res://we/world_environment.gd" type="Script" id=12]
+
+[sub_resource type="Environment" id=8]
+background_mode = 4
+glow_enabled = true
+glow_strength = 0.76
+glow_bloom = 0.49
+glow_blend_mode = 1
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameWindow:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("GameWindow:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "shake"
+length = 0.1
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("GameWindow:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.04, -19.8736, 0, -0.05, -20.8427, 0, 0 ),
+"times": PoolRealArray( 0, 0.1 )
+}
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 8 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.142
+shader_param/scanlines_width = 0.25
+shader_param/grille_opacity = 0.3
+shader_param/resolution = Vector2( 512, 512 )
+shader_param/pixelate = false
+shader_param/roll = true
+shader_param/roll_speed = 16.386
+shader_param/roll_size = 7.424
+shader_param/roll_variation = 3.323
+shader_param/distort_intensity = 0.0
+shader_param/noise_opacity = 0.0
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.0
+shader_param/aberration = 0.001
+shader_param/brightness = 1.4
+shader_param/discolor = true
+shader_param/warp_amount = 0.05
+shader_param/clip_warp = false
+shader_param/vignette_intensity = -0.188
+shader_param/vignette_opacity = 0.156
+
+[node name="Stage4" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = -128.0
+margin_right = 384.0
+margin_bottom = 384.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SubWindow" parent="." instance=ExtResource( 6 )]
+
+[node name="GameWindow" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameWindow"]
+environment = SubResource( 8 )
+script = ExtResource( 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameWindow"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 4 )
+anims/shake = SubResource( 5 )
+
+[node name="TileMap" parent="GameWindow" instance=ExtResource( 5 )]
+modulate = Color( 0.14902, 1, 0, 1 )
+tile_data = PoolIntArray( 655365, 0, 1, 655366, 0, 196610, 655367, 0, 196610, 655368, 0, 196610, 655369, 0, 196610, 655370, 0, 196610, 655371, 0, 196610, 655372, 0, 196610, 655373, 0, 196610, 655374, 0, 196610, 655375, 0, 196610, 655376, 0, 196610, 655377, 0, 196610, 655378, 0, 196610, 655379, 0, 2, 655380, 0, 2, 655381, 0, 2, 655382, 0, 2, 655383, 0, 2, 655384, 0, 2, 655385, 0, 3, 720901, 0, 65536, 720915, 0, 65537, 720916, 0, 65538, 720917, 0, 65538, 720918, 0, 65538, 720919, 0, 65538, 720920, 0, 65538, 720921, 0, 65539, 786437, 0, 65536, 786451, 0, 131073, 786452, 0, 131074, 786453, 0, 131074, 786454, 0, 131074, 786455, 0, 131074, 786456, 0, 131074, 786457, 0, 65539, 851973, 0, 65536, 851993, 0, 65536, 917509, 0, 65536, 917529, 0, 65536, 983045, 0, 65536, 983065, 0, 65536, 1048581, 0, 65536, 1048585, 0, 1, 1048586, 0, 196610, 1048587, 0, 3, 1048589, 0, 0, 1048591, 0, 0, 1048601, 0, 65536, 1114117, 0, 65536, 1114121, 0, 65536, 1114123, 0, 65537, 1114124, 0, 196610, 1114125, 0, 131074, 1114126, 0, 196610, 1114127, 0, 131075, 1114137, 0, 65536, 1179653, 0, 65536, 1179657, 0, 131073, 1179658, 0, 196610, 1179659, 0, 131075, 1179667, 0, 1, 1179668, 0, 2, 1179669, 0, 2, 1179670, 0, 2, 1179671, 0, 2, 1179672, 0, 2, 1179673, 0, 65539, 1245189, 0, 65536, 1245203, 0, 65537, 1245204, 0, 65538, 1245205, 0, 65538, 1245206, 0, 65538, 1245207, 0, 65538, 1245208, 0, 65538, 1245209, 0, 65539, 1310725, 0, 65536, 1310739, 0, 65537, 1310740, 0, 65538, 1310741, 0, 65538, 1310742, 0, 65538, 1310743, 0, 65538, 1310744, 0, 65538, 1310745, 0, 65539, 1376261, 0, 131073, 1376262, 0, 196610, 1376263, 0, 196610, 1376264, 0, 196610, 1376265, 0, 196610, 1376266, 0, 196610, 1376267, 0, 196610, 1376268, 0, 196610, 1376269, 0, 196610, 1376270, 0, 196610, 1376271, 0, 196610, 1376272, 0, 196610, 1376273, 0, 196610, 1376274, 0, 196610, 1376275, 0, 131074, 1376276, 0, 131074, 1376277, 0, 131074, 1376278, 0, 131074, 1376279, 0, 131074, 1376280, 0, 131074, 1376281, 0, 131075 )
+script = ExtResource( 9 )
+stage_glitch = ExtResource( 7 )
+
+[node name="Needle" parent="GameWindow" instance=ExtResource( 5 )]
+modulate = Color( 1, 0.0235294, 0, 1 )
+collision_layer = 4
+tile_data = PoolIntArray(  )
+
+[node name="Door" parent="GameWindow" instance=ExtResource( 1 )]
+position = Vector2( 192, 132 )
+
+[node name="Glitch" type="Node2D" parent="GameWindow"]
+
+[node name="Key" parent="GameWindow" instance=ExtResource( 11 )]
+position = Vector2( 156, 140 )
+
+[node name="Player" parent="GameWindow" instance=ExtResource( 2 )]
+position = Vector2( 84, 120 )
+
+[node name="CRTTexture" type="TextureRect" parent="GameWindow"]
+material = SubResource( 6 )
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 250.0
+margin_bottom = 250.0
+texture = ExtResource( 3 )
+expand = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="shake" from="GameWindow/Player" to="SubWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/WorldEnvironment" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/TileMap" method="_on_Player_shake"]
+[connection signal="shake" from="GameWindow/Player" to="GameWindow/CRTTexture" method="_on_Player_shake"]

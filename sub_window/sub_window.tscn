@@ -92,7 +92,7 @@ BEAT: [J] or [SPC]
 
 RETRY: [R]
 
-PREFERANCE: [ESC]"
+"
 
 [node name="TileMap2" type="TileMap" parent="."]
 modulate = Color( 0.101961, 0.631373, 0.0431373, 1 )
