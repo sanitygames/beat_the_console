@@ -138,10 +138,99 @@ script = ExtResource( 12 )
 
 [node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin"]
 frames = SubResource( 9 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin"]
+shape = SubResource( 11 )
+
+[node name="Coin2" type="RigidBody2D" parent="GameWindow"]
+position = Vector2( 92, 132 )
+collision_layer = 256
+collision_mask = 257
+mode = 2
+script = ExtResource( 12 )
+
+[node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin2"]
+frames = SubResource( 9 )
+frame = 3
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin2"]
+shape = SubResource( 11 )
+
+[node name="Coin3" type="RigidBody2D" parent="GameWindow"]
+position = Vector2( 124, 120 )
+collision_layer = 256
+collision_mask = 257
+mode = 2
+script = ExtResource( 12 )
+
+[node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin3"]
+frames = SubResource( 9 )
+frame = 2
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin3"]
+shape = SubResource( 11 )
+
+[node name="Coin4" type="RigidBody2D" parent="GameWindow"]
+position = Vector2( 192, 140 )
+collision_layer = 256
+collision_mask = 257
+mode = 2
+script = ExtResource( 12 )
+
+[node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin4"]
+frames = SubResource( 9 )
+frame = 2
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin4"]
+shape = SubResource( 11 )
+
+[node name="Coin5" type="RigidBody2D" parent="GameWindow"]
+position = Vector2( 172, 112 )
+collision_layer = 256
+collision_mask = 257
+mode = 2
+script = ExtResource( 12 )
+
+[node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin5"]
+frames = SubResource( 9 )
+frame = 2
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin5"]
+shape = SubResource( 11 )
+
+[node name="Coin6" type="RigidBody2D" parent="GameWindow"]
+position = Vector2( 64, 112 )
+collision_layer = 256
+collision_mask = 257
+mode = 2
+script = ExtResource( 12 )
+
+[node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin6"]
+frames = SubResource( 9 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin6"]
+shape = SubResource( 11 )
+
+[node name="Coin7" type="RigidBody2D" parent="GameWindow"]
+position = Vector2( 56, 144 )
+collision_layer = 256
+collision_mask = 257
+mode = 2
+script = ExtResource( 12 )
+
+[node name="Coin" type="AnimatedSprite" parent="GameWindow/Coin7"]
+frames = SubResource( 9 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Coin7"]
 shape = SubResource( 11 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="GameWindow"]
@@ -154,8 +243,7 @@ anims/RESET = SubResource( 4 )
 anims/shake = SubResource( 5 )
 
 [node name="TileMap" parent="GameWindow" instance=ExtResource( 20 )]
-modulate = Color( 0.14902, 1, 0, 1 )
-tile_data = PoolIntArray( 262148, 0, 1, 262149, 0, 196610, 262150, 0, 196610, 262151, 0, 196610, 262152, 0, 196610, 262153, 0, 196610, 262154, 0, 196610, 262155, 0, 196610, 262156, 0, 196610, 262157, 0, 196610, 262158, 0, 196610, 262159, 0, 196610, 262160, 0, 196610, 262161, 0, 196610, 262162, 0, 196610, 262163, 0, 196610, 262164, 0, 196610, 262165, 0, 196610, 262166, 0, 196610, 262167, 0, 196610, 262168, 0, 196610, 262169, 0, 196610, 262170, 0, 196610, 262171, 0, 3, 327684, 0, 65536, 327707, 0, 65536, 393220, 0, 65536, 393243, 0, 65536, 458756, 0, 65536, 458779, 0, 65536, 524292, 0, 65536, 524315, 0, 65536, 589828, 0, 65536, 589851, 0, 65536, 655364, 0, 65536, 655387, 0, 65536, 720900, 0, 65536, 720923, 0, 65536, 786436, 0, 65536, 786459, 0, 65536, 851972, 0, 65536, 851995, 0, 65536, 917508, 0, 65536, 917531, 0, 65536, 983044, 0, 65536, 983067, 0, 65536, 1048580, 0, 65536, 1048603, 0, 65536, 1114116, 0, 65536, 1114139, 0, 65536, 1179652, 0, 65536, 1179675, 0, 65536, 1245188, 0, 65536, 1245211, 0, 65536, 1310724, 0, 65536, 1310747, 0, 65536, 1376260, 0, 65536, 1376283, 0, 65536, 1441796, 0, 65536, 1441819, 0, 65536, 1507332, 0, 65536, 1507345, 0, 1, 1507346, 0, 2, 1507347, 0, 3, 1507355, 0, 65536, 1572868, 0, 65536, 1572879, 0, 1, 1572880, 0, 2, 1572881, 0, 65538, 1572882, 0, 65538, 1572883, 0, 65538, 1572884, 0, 3, 1572891, 0, 65536, 1638404, 0, 65536, 1638415, 0, 65537, 1638416, 0, 65538, 1638417, 0, 65538, 1638418, 0, 65538, 1638419, 0, 65538, 1638420, 0, 65538, 1638421, 0, 2, 1638422, 0, 2, 1638423, 0, 3, 1638427, 0, 65536, 1703940, 0, 65536, 1703944, 0, 1, 1703945, 0, 2, 1703946, 0, 2, 1703947, 0, 2, 1703948, 0, 2, 1703949, 0, 2, 1703950, 0, 2, 1703951, 0, 65538, 1703952, 0, 65538, 1703953, 0, 65538, 1703954, 0, 65538, 1703955, 0, 65538, 1703956, 0, 65538, 1703957, 0, 65538, 1703958, 0, 65538, 1703959, 0, 65538, 1703960, 0, 2, 1703961, 0, 3, 1703963, 0, 65536, 1769476, 0, 131073, 1769477, 0, 196610, 1769478, 0, 196610, 1769479, 0, 196610, 1769480, 0, 131074, 1769481, 0, 131074, 1769482, 0, 131074, 1769483, 0, 131074, 1769484, 0, 131074, 1769485, 0, 131074, 1769486, 0, 131074, 1769487, 0, 131074, 1769488, 0, 131074, 1769489, 0, 131074, 1769490, 0, 131074, 1769491, 0, 131074, 1769492, 0, 131074, 1769493, 0, 131074, 1769494, 0, 131074, 1769495, 0, 131074, 1769496, 0, 131074, 1769497, 0, 131074, 1769498, 0, 196610, 1769499, 0, 131075 )
+tile_data = PoolIntArray( 262148, 0, 1, 262149, 0, 196610, 262150, 0, 196610, 262151, 0, 196610, 262152, 0, 196610, 262153, 0, 196610, 262154, 0, 196610, 262155, 0, 196610, 262156, 0, 196610, 262157, 0, 196610, 262158, 0, 196610, 262159, 0, 196610, 262160, 0, 196610, 262161, 0, 196610, 262162, 0, 196610, 262163, 0, 196610, 262164, 0, 196610, 262165, 0, 196610, 262166, 0, 196610, 262167, 0, 196610, 262168, 0, 196610, 262169, 0, 196610, 262170, 0, 196610, 262171, 0, 3, 327684, 0, 65536, 327707, 0, 65536, 393220, 0, 65536, 393243, 0, 65536, 458756, 0, 65536, 458779, 0, 65536, 524292, 0, 65536, 524315, 0, 65536, 589828, 0, 65536, 589851, 0, 65536, 655364, 0, 65536, 655387, 0, 65536, 720900, 0, 65536, 720923, 0, 65536, 786436, 0, 65536, 786459, 0, 65536, 851972, 0, 65536, 851995, 0, 65536, 917508, 0, 65536, 917531, 0, 65536, 983044, 0, 65536, 983067, 0, 65536, 983098, 0, 196608, 1048580, 0, 65536, 1048603, 0, 65536, 1114116, 0, 65536, 1114139, 0, 65536, 1179652, 0, 65536, 1179675, 0, 65536, 1245188, 0, 65536, 1245211, 0, 65536, 1310724, 0, 65536, 1310747, 0, 65536, 1376260, 0, 65536, 1376283, 0, 65536, 1441796, 0, 65536, 1441819, 0, 65536, 1507332, 0, 65536, 1507345, 0, 1, 1507346, 0, 2, 1507347, 0, 3, 1507355, 0, 65536, 1572868, 0, 65536, 1572879, 0, 1, 1572880, 0, 2, 1572881, 0, 65538, 1572882, 0, 65538, 1572883, 0, 65538, 1572884, 0, 3, 1572891, 0, 65536, 1638404, 0, 65536, 1638415, 0, 65537, 1638416, 0, 65538, 1638417, 0, 65538, 1638418, 0, 65538, 1638419, 0, 65538, 1638420, 0, 65538, 1638421, 0, 2, 1638422, 0, 2, 1638423, 0, 3, 1638427, 0, 65536, 1703940, 0, 65536, 1703944, 0, 1, 1703945, 0, 2, 1703946, 0, 2, 1703947, 0, 2, 1703948, 0, 2, 1703949, 0, 2, 1703950, 0, 2, 1703951, 0, 65538, 1703952, 0, 65538, 1703953, 0, 65538, 1703954, 0, 65538, 1703955, 0, 65538, 1703956, 0, 65538, 1703957, 0, 65538, 1703958, 0, 65538, 1703959, 0, 65538, 1703960, 0, 2, 1703961, 0, 3, 1703963, 0, 65536, 1769476, 0, 131073, 1769477, 0, 196610, 1769478, 0, 196610, 1769479, 0, 196610, 1769480, 0, 131074, 1769481, 0, 131074, 1769482, 0, 131074, 1769483, 0, 131074, 1769484, 0, 131074, 1769485, 0, 131074, 1769486, 0, 131074, 1769487, 0, 131074, 1769488, 0, 131074, 1769489, 0, 131074, 1769490, 0, 131074, 1769491, 0, 131074, 1769492, 0, 131074, 1769493, 0, 131074, 1769494, 0, 131074, 1769495, 0, 131074, 1769496, 0, 131074, 1769497, 0, 131074, 1769498, 0, 196610, 1769499, 0, 131075 )
 script = ExtResource( 7 )
 stage_glitch = ExtResource( 5 )
 
@@ -180,7 +268,7 @@ script = ExtResource( 9 )
 
 [node name="CoinGetSound" type="AudioStreamPlayer" parent="GameWindow/Player/Area2D"]
 stream = ExtResource( 3 )
-volume_db = -19.424
+volume_db = -5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameWindow/Player/Area2D"]
 shape = SubResource( 12 )
